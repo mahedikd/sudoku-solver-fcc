@@ -1,12 +1,32 @@
 class SudokuSolver {
-  
+  conflicts(puzzleString, row, column, value) {
+    const board = this.transform(puzzleString);
+
+    let match = true;
+
+    if (board[row][column] !== value && board[row][column] !== 0) {
+      match = false;
+    }
+    // return's false if there is a conflict
+    const rowConflict = this.checkRowPlacement(puzzleString, row, column, value);
+    const colConflict = this.checkColPlacement(puzzleString, row, column, value);
+    const regionConflict = this.checkRegionPlacement(puzzleString, row, column, value);
+
+    if (!rowConflict || !colConflict || !regionConflict) {
+      match = false;
+    }
+    if (board[row][column] === value) {
+      match = true;
+    }
+    return match;
+  }
 
   validate(puzzleString) {
-		 if (/[^1-9.]/.test(puzzleString) || puzzleString.length !== 81) {
+    if (/[^1-9.]/.test(puzzleString) || puzzleString.length !== 81) {
       return false;
     }
-		return true
-	}
+    return true;
+  }
 
   checkRowPlacement(puzzleString, row, column, value) {
     const board = this.transform(puzzleString);
@@ -45,11 +65,10 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-		
-		if(!this.validate(puzzleString)){
-			return false
-		}
-		
+    if (!this.validate(puzzleString)) {
+      return false;
+    }
+
     const board = this.transform(puzzleString);
     const solved = this.solveSudoku(board, 9);
     if (!solved) {
