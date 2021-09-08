@@ -1,13 +1,16 @@
 class SudokuSolver {
-  N = 9;
+  
 
-  validate(puzzleString) {}
+  validate(puzzleString) {
+		 if (/[^1-9.]/.test(puzzleString) || puzzleString.length !== 81) {
+      return false;
+    }
+		return true
+	}
 
   checkRowPlacement(puzzleString, row, column, value) {
     const board = this.transform(puzzleString);
     row = typeof row === 'number' ? row : this.rowToNum(row);
-
-    if (board[row][column] === value) return false;
 
     for (let d = 0; d < board.length; d++) {
       if (board[row][column !== 'number' ? d : column] == value) return false;
@@ -19,8 +22,6 @@ class SudokuSolver {
     const board = this.transform(puzzleString);
     row = typeof row === 'number' ? row : this.rowToNum(row);
 
-    if (board[row][column] === value) return false;
-
     for (let r = 0; r < board.length; r++) {
       if (board[r !== 'number' ? r : row][column] == value) return false;
     }
@@ -30,8 +31,6 @@ class SudokuSolver {
   checkRegionPlacement(puzzleString, row, column, value) {
     const board = this.transform(puzzleString);
     row = typeof row === 'number' ? row : this.rowToNum(row);
-
-    if (board[row][column] === value) return false;
 
     let sqrt = Math.floor(Math.sqrt(board.length));
     let boxRowStart = row - (row % sqrt);
@@ -46,11 +45,13 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-    if (/[^1-9.]/.test(puzzleString) || puzzleString.length !== 81) {
-      return false;
-    }
+		
+		if(!this.validate(puzzleString)){
+			return false
+		}
+		
     const board = this.transform(puzzleString);
-    const solved = this.solveSudoku(board, this.N);
+    const solved = this.solveSudoku(board, 9);
     if (!solved) {
       return false;
     }

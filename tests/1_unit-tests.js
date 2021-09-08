@@ -9,8 +9,8 @@ const invalidPuzzleString =
   '1.5..2.84..63.12.7.2..5.....9..k....8.2.3674.3.7.2..9.47...8..1..16....926914.37.';
 const invalidPuzzleStringLessChar =
   '1.5..2.84..63.12.7.2..5.....9......8.2.3674.3.7.2..9.47...8..1..16....926914.37.';
-const [validPuzzleString, validPuzzleStringAns] = require('../controllers/puzzle-strings')
-  .puzzlesAndSolutions[0];
+const [validPuzzleString, validPuzzleStringAns] = require('../controllers/puzzle-strings').puzzlesAndSolutions[0];
+
 
 suite('UnitTests', () => {
   // test 1
