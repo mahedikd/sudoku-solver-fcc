@@ -30,7 +30,7 @@ module.exports = function(app) {
 
 		const valNum = parseInt(value, 10);
 		const colNum = parseInt(col, 10) - 1;
-		const rowNum = rowToNum(row) - 1;
+		const rowNum = rowToNum(row);
 		const validCol = solver.checkColPlacement(puzzle, rowNum, colNum, valNum);
 		const validReg = solver.checkRegionPlacement(puzzle, rowNum, colNum, valNum);
 		const validRow = solver.checkRowPlacement(puzzle, rowNum, colNum, valNum);
@@ -81,31 +81,31 @@ function rowToNum(row) {
 	let num;
 	switch (row.toLowerCase()) {
 		case 'a':
-			num = 1;
+			num = 0;
 			break;
 		case 'b':
-			num = 2;
+			num = 1;
 			break;
 		case 'c':
-			num = 3;
+			num = 2;
 			break;
 		case 'd':
-			num = 4;
+			num = 3;
 			break;
 		case 'e':
-			num = 5;
+			num = 4;
 			break;
 		case 'f':
-			num = 6;
+			num = 5;
 			break;
 		case 'g':
-			num = 7;
+			num = 6;
 			break;
 		case 'h':
-			num = 8;
+			num = 7;
 			break;
 		case 'i':
-			num = 9;
+			num = 8;
 			break;
 	}
 	return num;
